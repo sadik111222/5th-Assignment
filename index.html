@@ -7,16 +7,19 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="./home.html">
+
     <link rel="icon" href="./assets/github-logo.png">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <title>Issues Tracker</title>
+
 </head>
-<body>
-    <div id="login-page" class="min-h-screen flex items-center justify-center bg-gray-50">
-        <div class="bg-white p-8 rounded-lg shadow-md w-96 text-center">
-            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" class="w-16 mx-auto mb-6">
+<body class="bg-gray-200 min-h-screen flex items-center justify-center">
+    <div id="login-page" class="min-h-screen flex items-center justify-center ">
+        <div class="bg-white p-8 rounded-lg shadow-md md:w-96 text-center">
+            <img src="./assets/github-logo.png" alt="GitHub Logo" class="w-14 mx-auto mb-6">
             <h1 class="text-2xl font-bold text-gray-900 mb-2">GitHub Issues Tracker</h1>
             <p class="text-gray-500 mb-8">Sign in to manage your issues</p>
             
@@ -44,15 +47,11 @@
                     </div>
                 </div>
                 
-                <div class="mt-4 text-sm text-gray-600">
-                    <p class="font-medium mb-2">Demo Credentials</p>
-                    <p class="text-xs">Username: <span class="font-mono bg-gray-100 px-1 rounded">admin</span></p>
-                    <p class="text-xs">Password: <span class="font-mono bg-gray-100 px-1 rounded">admin123</span></p>
-                </div>
+                <button class="w-25 mt-4 bg-[#5c4b88] text-white p-3 rounded-lg hover:bg-purple-800 cursor-pointer transition font-medium">Sign Up</button>
             </div>
         </div>
     </div>
 
-
+    <script src="script.js"></script>
 </body>
 </html>
