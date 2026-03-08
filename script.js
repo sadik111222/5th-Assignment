@@ -10,6 +10,10 @@ const issuesGrid = document.getElementById('issuesGrid');
 const loadingSpinner = document.getElementById('loadingSpinner');
 const issueCount = document.getElementById('issueCount');
 
+const DEMO_CREDENTIALS = {
+    username: 'admin',
+    password: 'admin123'
+};
 
 const API_ENDPOINTS = {
     allIssues: 'https://phi-lab-server.vercel.app/api/v1/lab/issues',
@@ -17,10 +21,45 @@ const API_ENDPOINTS = {
     searchIssues: (query) => `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${query}`
 };
 
-const DEMO_CREDENTIALS = {
-    username: 'admin',
-    password: 'admin123'
-};
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupEventListeners();
+});
+
+function setupEventListeners() {
+    // Login form submission
+    loginForm.addEventListener('submit', handleLogin);
+    
+    // Tab buttons
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', handleTabChange);
+    });
+    
+    // Search functionality
+    searchBtn.addEventListener('click', handleSearch);
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    });
+    
+    // Modal close buttons
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    
+    // Close modal when clicking outside
+    issueModal.addEventListener('click', (e) => {
+        if (e.target === issueModal) {
+            closeModal();
+        }
+    });
+    
+    // New Issue button (placeholder functionality)
+    document.getElementById('newIssueBtn').addEventListener('click', () => {
+        alert('New Issue functionality would be implemented here');
+    });
+}
 
 function handleLogin(e) {
     e.preventDefault();
