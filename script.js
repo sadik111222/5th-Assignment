@@ -1,3 +1,4 @@
+// Global variables
 let currentTab = 'all';
 let allIssues = [];
 let filteredIssues = [];
@@ -346,4 +347,123 @@ function createIssueCard(issue) {
     card.addEventListener('click', () => openIssueModal(issue));
     
     return card;
+}
+
+// Get priority color
+function getPriorityColor(priority) {
+    switch (priority?.toUpperCase()) {
+        case 'HIGH':
+            return 'bg-red-100 text-red-700';
+        case 'MEDIUM':
+            return 'bg-yellow-100 text-yellow-700';
+        case 'LOW':
+            return 'bg-green-100 text-green-700';
+        default:
+            return 'bg-gray-100 text-gray-700';
+    }
+}
+
+// Open issue modal
+async function openIssueModal(issue) {
+    try {
+        // Fetch full issue details
+        const response = await fetch(API_ENDPOINTS.singleIssue(issue.id));
+        if (!response.ok) {
+            throw new Error('Failed to fetch issue details');
+        }
+        
+        const fullIssue = await response.json();
+        
+        // Populate modal
+        document.getElementById('modalTitle').textContent = fullIssue.title;
+        document.getElementById('modalStatus').textContent = fullIssue.status;
+        document.getElementById('modalStatus').className = `px-3 py-1 rounded-full text-sm font-medium ${
+            fullIssue.status === 'open' ? 'bg-green-100 text-green-700' : 'bg-purple-100 text-purple-700'
+        }`;
+        document.getElementById('modalPriority').textContent = fullIssue.priority || 'MEDIUM';
+        document.getElementById('modalPriority').className = `px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(fullIssue.priority)}`;
+        document.getElementById('modalAuthor').textContent = fullIssue.author || 'Unknown';
+        document.getElementById('modalDate').textContent = new Date(fullIssue.createdAt).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+        document.getElementById('modalAssignee').textContent = fullIssue.assignee || 'Unassigned';
+        document.getElementById('modalNumber').textContent = fullIssue.id;
+        document.getElementById('modalDescription').textContent = fullIssue.description || 'No description available';
+        
+        // Populate labels
+        const modalLabels = document.getElementById('modalLabels');
+        modalLabels.innerHTML = '';
+        if (fullIssue.labels && fullIssue.labels.length > 0) {
+            fullIssue.labels.forEach(label => {
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded';
+                labelSpan.textContent = label;
+                modalLabels.appendChild(labelSpan);
+            });
+        } else {
+            modalLabels.innerHTML = '<span class="text-gray-500 text-sm">No labels</span>';
+        }
+        
+        // Show modal
+        issueModal.classList.add('show');
+        
+    } catch (error) {
+        console.error('Error fetching issue details:', error);
+        // Use basic issue data if API call fails
+        populateModalWithBasicData(issue);
+        issueModal.classList.add('show');
+    }
+}
+
+// Populate modal with basic issue data (fallback)
+function populateModalWithBasicData(issue) {
+    document.getElementById('modalTitle').textContent = issue.title;
+    document.getElementById('modalStatus').textContent = issue.status;
+    document.getElementById('modalStatus').className = `px-3 py-1 rounded-full text-sm font-medium ${
+        issue.status === 'open' ? 'bg-green-100 text-green-700' : 'bg-purple-100 text-purple-700'
+    }`;
+    document.getElementById('modalPriority').textContent = issue.priority || 'MEDIUM';
+    document.getElementById('modalPriority').className = `px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(issue.priority)}`;
+    document.getElementById('modalAuthor').textContent = issue.author || 'Unknown';
+    document.getElementById('modalDate').textContent = new Date(issue.createdAt).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+    document.getElementById('modalAssignee').textContent = 'Unassigned';
+    document.getElementById('modalNumber').textContent = issue.id;
+    document.getElementById('modalDescription').textContent = issue.description || 'No description available';
+    
+    // Populate labels
+    const modalLabels = document.getElementById('modalLabels');
+    modalLabels.innerHTML = '';
+    if (issue.labels && issue.labels.length > 0) {
+        issue.labels.forEach(label => {
+            const labelSpan = document.createElement('span');
+            labelSpan.className = 'inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded';
+            labelSpan.textContent = label;
+            modalLabels.appendChild(labelSpan);
+        });
+    } else {
+        modalLabels.innerHTML = '<span class="text-gray-500 text-sm">No labels</span>';
+    }
+}
+
+// Close modal
+function closeModal() {
+    issueModal.classList.remove('show');
+}
+
+// Show loading spinner
+function showLoadingSpinner() {
+    loadingSpinner.classList.remove('hidden');
+    issuesGrid.classList.add('hidden');
+}
+
+// Hide loading spinner
+function hideLoadingSpinner() {
+    loadingSpinner.classList.add('hidden');
+    issuesGrid.classList.remove('hidden');
 }
