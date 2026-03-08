@@ -8,27 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="./style.css">
-    <style>
-        
-    </style>
+    
 </head>
 <body class="bg-gray-200 min-h-screen flex items-center justify-center">
     <!-- Login Page -->
-    <div id="loginPage" class="w-full max-w-md">
+    <div id="loginPage" class=" w-full max-w-sm sm:max-w-md mx-6">
         <div class="bg-white rounded-lg shadow-lg p-8">
 
-            <div class="flex justify-center mb-6 ">
-                <span class=""><img src="./assets/github-logo.png" alt="Github logo"></span>
+            <div class="flex justify-center  mb-6 ">
+                <span class=" w-16"><img src="./assets/github-logo.png" alt="Github logo"></span>
             </div>
     
             <h1 class="text-2xl font-bold text-center text-gray-800 mb-2">GitHub Issues Tracker</h1>
             
-            <!-- Subtitle -->
+           
             <p class="text-center text-gray-600 mb-8">Sign in to manage your issues</p>
             
             <!-- Login Form -->
             <form id="loginForm" class="space-y-6">
-                <!-- Username Input -->
+               
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
                     <input 
@@ -42,7 +40,7 @@
                     <p class="text-xs text-gray-500 mt-1">Default: admin</p>
                 </div>
                 
-                <!-- Password Input -->
+                
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
                     <input 
@@ -56,16 +54,16 @@
                     <p class="text-xs text-gray-500 mt-1">Default: admin123</p>
                 </div>
                 
-                <!-- Sign In Button -->
+                
                 <button 
                     type="submit"
-                    class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-200 font-medium"
+                    class="w-full bg-[#4A00FF] text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-200 font-medium"
                 >
                     Sign In
                 </button>
             </form>
             
-            <!-- Divider -->
+            
             <div class="relative my-6">
                 <div class="absolute inset-0 flex items-center">
                     <div class="w-full border-t border-gray-300"></div>
@@ -75,51 +73,57 @@
                 </div>
             </div>
             
-            <!-- Demo Credentials -->
+
             <div class="bg-gray-200 rounded-lg p-4 ">
+
                 <h3 class="text-sm font-semibold text-gray-700 mb-2">Demo Credentials</h3>
+
                 <div class="space-y-1 text-sm text-gray-600">
                     <p><strong>Username:</strong> admin</p>
                     <p><strong>Password:</strong> admin123</p>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Main Page (Initially Hidden) -->
-    <div id="mainPage" class="hidden w-full min-h-screen bg-gray-50">
+    <!-- Main Page -->
+
+    <div id="mainPage" class="hidden w-full min-h-screen bg-gray-200">
+
         <!-- Navbar -->
+
         <nav class="bg-white shadow-sm border-b border-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-16">
-                    <!-- Logo/Name -->
-                    <div class="flex items-center">
-                        <i class="fab fa-github text-2xl text-gray-800 mr-3"></i>
-                        <h1 class="text-xl font-bold text-gray-800">GitHub Issues Tracker</h1>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+                <div class="md:flex md:flex-row sm:flex-col  justify-between items-center sm:h-32 md:h-16 p-3">
+                   
+                    <div class="flex justify-center items-center gap-4 ">
+                        <span class=" w-9 "><img src="./assets/github-logo.png" alt="github logo"></span>
+                        <h1 class="text-2xl font-semibold text-gray-800">GitHub Issues Tracker</h1>
                     </div>
                     
-                    <!-- Search and New Issue Button -->
-                    <div class="flex items-center space-x-4">
+                   
+                    <div class="flex justify-center pt-4 md:pt-0 items-center space-x-4 ">
                         <div class="relative">
                             <input 
                                 type="text" 
                                 id="searchInput"
                                 placeholder="Search issues..." 
-                                class="w-64 px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                                class="w-40 sm:w-64  px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
                             >
                             <button 
                                 id="searchBtn"
                                 class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-purple-600"
                             >
-                                <i class="fas fa-search"></i>
+                            
                             </button>
                         </div>
                         <button 
                             id="newIssueBtn"
-                            class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-200 flex items-center"
+                            class="bg-[#4A00FF] text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-200 flex items-center"
                         >
-                            <i class="fas fa-plus mr-2"></i>
-                            New Issue
+                          
+                            Search
                         </button>
                     </div>
                 </div>
@@ -127,25 +131,25 @@
         </nav>
 
         <!-- Main Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-[1110px]  mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
            
             <div class="bg-white rounded-lg shadow-sm mb-6">
                
-                <div class="flex space-x-1 p-1">
+                <div class="flex p-3 sm:p-6 pt-8 gap-4 sm:gap-8">
                     <button 
-                        class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition duration-200 tab-active"
+                        class="tab-btn flex-1 py-2 px-4 bg-gray-200 rounded-lg font-medium transition duration-200 tab-active"
                         data-tab="all"
                     >
                         All
                     </button>
                     <button 
-                        class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        class="tab-btn flex-1 py-2 px-4 bg-gray-200 rounded-lg font-medium transition duration-200 "
                         data-tab="open"
                     >
                         Open
                     </button>
                     <button 
-                        class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        class="tab-btn flex-1 py-2 px-4 bg-gray-200 rounded-lg font-medium transition duration-200 "
                         data-tab="closed"
                     >
                         Closed
@@ -154,9 +158,9 @@
                 
                 
                 <div class="px-6 py-4 border-t border-gray-200">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-4">
-                            <i class="fas fa-exclamation-circle text-gray-400 text-xl"></i>
+                    <div class="sm:flex justify-between items-center">
+                        <div class=" flex items-center space-x-4 sm:h-[50px] h-[100px]">
+                            <span><img src="./assets/Aperture.png" alt=""></span>
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-800">
                                     <span id="issueCount">0</span> Issues
@@ -164,13 +168,13 @@
                                 <p class="text-sm text-gray-600">Track and manage your project issues</p>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-4">
+                        <div class="flex justify-center items-center space-x-4">
                             <div class="flex items-center">
-                                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                <div class="w-3 h-3 bg-[#00A96E] rounded-full mr-2"></div>
                                 <span class="text-sm text-gray-600">Open</span>
                             </div>
                             <div class="flex items-center">
-                                <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+                                <div class="w-3 h-3 bg-[#A855F7] rounded-full mr-2"></div>
                                 <span class="text-sm text-gray-600">Closed</span>
                             </div>
                         </div>
@@ -239,7 +243,7 @@
                     <div>
                         <h3 class="font-medium text-gray-700 mb-2">Labels</h3>
                         <div id="modalLabels" class="flex flex-wrap gap-2">
-                            <!-- Labels will be added dynamically -->
+                            
                         </div>
                     </div>
                 </div>

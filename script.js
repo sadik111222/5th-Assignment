@@ -235,10 +235,10 @@ function handleTabChange(e) {
     tabButtons.forEach(btn => {
         if (btn.dataset.tab === selectedTab) {
             btn.classList.add('tab-active');
-            btn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+            btn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-300');
         } else {
             btn.classList.remove('tab-active');
-            btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+            btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-300');
         }
     });
     
