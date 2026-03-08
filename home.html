@@ -43,6 +43,68 @@
                 </div>
             </div>
         </nav>
+
+         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Tab Section -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <!-- Tabs -->
+                <div class="flex space-x-1 p-1">
+                    <button 
+                        class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition duration-200 tab-active"
+                        data-tab="all"
+                    >
+                        All
+                    </button>
+                    <button 
+                        class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        data-tab="open"
+                    >
+                        Open
+                    </button>
+                    <button 
+                        class="tab-btn flex-1 py-2 px-4 rounded-lg font-medium transition duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        data-tab="closed"
+                    >
+                        Closed
+                    </button>
+                </div>
+                
+                <!-- Issue Summary -->
+                <div class="px-6 py-4 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-exclamation-circle text-gray-400 text-xl"></i>
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-800">
+                                    <span id="issueCount">0</span> Issues
+                                </h2>
+                                <p class="text-sm text-gray-600">Track and manage your project issues</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-sm text-gray-600">Open</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+                                <span class="text-sm text-gray-600">Closed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="flex justify-center items-center py-12 hidden">
+                <div class="loading-spinner"></div>
+            </div>
+
+            <!-- Issues Grid -->
+            <div id="issuesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Issue cards will be dynamically added here -->
+            </div>
+        </div>
     </header>
 
 
