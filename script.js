@@ -341,3 +341,9 @@ function createIssueCard(issue) {
             </div>
         </div>
     `;
+    
+    // Add click event to open modal
+    card.addEventListener('click', () => openIssueModal(issue));
+    
+    return card;
+}
