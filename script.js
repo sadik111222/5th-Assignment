@@ -51,7 +51,7 @@ function setupEventListeners() {
         }
     });
     
-    // Modal close buttons
+    
     document.getElementById('closeModal').addEventListener('click', closeModal);
     document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
     
@@ -62,7 +62,7 @@ function setupEventListeners() {
         }
     });
     
-    // New Issue button (placeholder functionality)
+    
     document.getElementById('newIssueBtn').addEventListener('click', () => {
         alert('New Issue functionality would be implemented here');
     });
@@ -92,15 +92,15 @@ function handleLogin(e) {
 
 // Show error message
 function showError(message) {
-    // Create error element
+
     const errorDiv = document.createElement('div');
     errorDiv.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4';
     errorDiv.textContent = message;
     
-    // Insert before form
+   
     loginForm.parentNode.insertBefore(errorDiv, loginForm);
     
-    // Remove after 3 seconds
+    
     setTimeout(() => {
         errorDiv.remove();
     }, 3000);
@@ -117,9 +117,9 @@ async function loadIssues() {
         }
         
         const apiResponse = await response.json();
-        allIssues = apiResponse.data; // Extract data array from API response
+        allIssues = apiResponse.data; 
         
-        // Demonstrate working with issues array
+        
         demonstrateArrayOperations(allIssues);
         
         filterAndDisplayIssues();
@@ -135,16 +135,16 @@ async function loadIssues() {
 function demonstrateArrayOperations(issues) {
     console.log('=== Issues Array Operations Demo ===');
     
-    // 1. Total issues count
+    
     console.log('Total issues:', issues.length);
     
-    // 2. Count by status
+   
     const openIssues = issues.filter(issue => issue.status === 'open');
     const closedIssues = issues.filter(issue => issue.status === 'closed');
     console.log('Open issues:', openIssues.length);
     console.log('Closed issues:', closedIssues.length);
     
-    // 3. Count by priority
+    
     const highPriority = issues.filter(issue => issue.priority === 'high');
     const mediumPriority = issues.filter(issue => issue.priority === 'medium');
     const lowPriority = issues.filter(issue => issue.priority === 'low');
@@ -152,22 +152,22 @@ function demonstrateArrayOperations(issues) {
     console.log('Medium priority:', mediumPriority.length);
     console.log('Low priority:', lowPriority.length);
     
-    // 4. Get all unique labels
+    
     const allLabels = issues.flatMap(issue => issue.labels || []);
     const uniqueLabels = [...new Set(allLabels)];
     console.log('All labels:', uniqueLabels);
     
-    // 5. Find issues by author
+    
     const issuesByJohn = issues.filter(issue => issue.author === 'john_doe');
     console.log('Issues by john_doe:', issuesByJohn.length);
     
-    // 6. Sort by creation date (newest first)
+    
     const sortedByDate = [...issues].sort((a, b) => 
         new Date(b.createdAt) - new Date(a.createdAt)
     );
     console.log('Newest issue:', sortedByDate[0]?.title);
     
-    // 7. Group by status
+   
     const groupedByStatus = issues.reduce((acc, issue) => {
         if (!acc[issue.status]) acc[issue.status] = [];
         acc[issue.status].push(issue);
@@ -175,13 +175,13 @@ function demonstrateArrayOperations(issues) {
     }, {});
     console.log('Grouped by status:', Object.keys(groupedByStatus));
     
-    // 8. Find high priority open issues
+   
     const highPriorityOpen = issues.filter(issue => 
         issue.status === 'open' && issue.priority === 'high'
     );
     console.log('High priority open issues:', highPriorityOpen.length);
     
-    // 9. Map to simple format
+    
     const simpleFormat = issues.map(issue => ({
         id: issue.id,
         title: issue.title,
@@ -190,7 +190,7 @@ function demonstrateArrayOperations(issues) {
     }));
     console.log('Simple format (first 3):', simpleFormat.slice(0, 3));
     
-    // 10. Search in titles and descriptions
+   
     const searchResults = issues.filter(issue => 
         issue.title.toLowerCase().includes('bug') || 
         issue.description.toLowerCase().includes('bug')
@@ -216,7 +216,7 @@ async function handleSearch() {
         }
         
         const searchResponse = await response.json();
-        allIssues = searchResponse.data || []; // Extract data array from search response
+        allIssues = searchResponse.data || []; 
         filterAndDisplayIssues();
     } catch (error) {
         console.error('Error searching issues:', error);
@@ -245,9 +245,9 @@ function handleTabChange(e) {
     filterAndDisplayIssues();
 }
 
-// Filter and display issues based on current tab
+
 function filterAndDisplayIssues() {
-    // Filter issues based on current tab
+   
     switch (currentTab) {
         case 'open':
             filteredIssues = allIssues.filter(issue => issue.status === 'open');
@@ -291,23 +291,23 @@ function createIssueCard(issue) {
     const card = document.createElement('div');
     card.className = 'issue-card bg-white rounded-lg shadow-sm border border-gray-200 cursor-pointer overflow-hidden';
     
-    // Add top border based on status
+    
     const borderTopColor = issue.status === 'open' ? 'border-green-500' : 'border-purple-500';
     card.classList.add('border-t-4', borderTopColor);
     
-    // Format date
+    
     const createdDate = new Date(issue.createdAt).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric'
     });
     
-    // Create labels HTML
+    
     const labelsHTML = issue.labels ? issue.labels.map(label => 
         `<span class="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">${label}</span>`
     ).join(' ') : '';
     
-    // Priority color
+    
     const priorityColor = getPriorityColor(issue.priority);
     
     card.innerHTML = `
@@ -349,7 +349,7 @@ function createIssueCard(issue) {
     return card;
 }
 
-// Get priority color
+
 function getPriorityColor(priority) {
     switch (priority?.toUpperCase()) {
         case 'HIGH':
@@ -366,15 +366,16 @@ function getPriorityColor(priority) {
 // Open issue modal
 async function openIssueModal(issue) {
     try {
-        // Fetch full issue details
+       
         const response = await fetch(API_ENDPOINTS.singleIssue(issue.id));
         if (!response.ok) {
             throw new Error('Failed to fetch issue details');
         }
         
-        const fullIssue = await response.json();
+        const apiResponse =  await response.json();
+        const fullIssue = apiResponse.data;
         
-        // Populate modal
+        
         document.getElementById('modalTitle').textContent = fullIssue.title;
         document.getElementById('modalStatus').textContent = fullIssue.status;
         document.getElementById('modalStatus').className = `px-3 py-1 rounded-full text-sm font-medium ${
@@ -392,7 +393,7 @@ async function openIssueModal(issue) {
         document.getElementById('modalNumber').textContent = fullIssue.id;
         document.getElementById('modalDescription').textContent = fullIssue.description || 'No description available';
         
-        // Populate labels
+        
         const modalLabels = document.getElementById('modalLabels');
         modalLabels.innerHTML = '';
         if (fullIssue.labels && fullIssue.labels.length > 0) {
@@ -406,18 +407,18 @@ async function openIssueModal(issue) {
             modalLabels.innerHTML = '<span class="text-gray-500 text-sm">No labels</span>';
         }
         
-        // Show modal
+        
         issueModal.classList.add('show');
         
     } catch (error) {
         console.error('Error fetching issue details:', error);
-        // Use basic issue data if API call fails
+        
         populateModalWithBasicData(issue);
         issueModal.classList.add('show');
     }
 }
 
-// Populate modal with basic issue data (fallback)
+
 function populateModalWithBasicData(issue) {
     document.getElementById('modalTitle').textContent = issue.title;
     document.getElementById('modalStatus').textContent = issue.status;
@@ -451,18 +452,18 @@ function populateModalWithBasicData(issue) {
     }
 }
 
-// Close modal
+
 function closeModal() {
     issueModal.classList.remove('show');
 }
 
-// Show loading spinner
+
 function showLoadingSpinner() {
     loadingSpinner.classList.remove('hidden');
     issuesGrid.classList.add('hidden');
 }
 
-// Hide loading spinner
+
 function hideLoadingSpinner() {
     loadingSpinner.classList.add('hidden');
     issuesGrid.classList.remove('hidden');
